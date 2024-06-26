@@ -1,0 +1,48 @@
+<!--Namespace da classe de Modelo para esta view-->
+@model IEnumerable<APIMvc.Models.FMViewModel>
+<!--Inclua os TempData para Sucesso e Erro aqui, conforme exemplo na view de Autenticação-->
+@{
+    ViewBag.Title = "Frases";
+}
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]</div>
+}
+<!--Configuração para exibir mensagem de erro -->
+@if (@TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["MensagemErro"]</div>
+}<!--Título da página para o navegador-->
+<h2>Digame Qual seu sentimeto</h2><!--Título da página-->
+<p> <!--Links apontando para views na mesma pasta-->
+    @Html.ActionLink("Criar Nova Moeda", "Create")
+</p>
+<table class="table">
+    <tr><!--Títulos das colunas da tabela-->
+        <th>@Html.DisplayNameFor(model => model.Frase)</th>
+        <th>@Html.DisplayNameFor(model => model.Sentimento)</th>
+        <th>@Html.DisplayNameFor(model => model.Autor)</th>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        
+        <th></th>
+    </tr>
+    <!--Looping para escrever os dados na tabela-->
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Frase)</td>
+            <td>@Html.DisplayFor(modelItem => item.Sentimento)</td>
+            <td>@Html.DisplayFor(modelItem => item.Autor)</td>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            
+            <td><!--Coluna para Links/botões-->
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+
+                @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
+                , new { onclick ="return confirm ('Deseja Realmente excluir essa frase ?');"})
+            </td>
+        </tr>
+    }
+</table>

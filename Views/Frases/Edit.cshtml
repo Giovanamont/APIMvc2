@@ -1,0 +1,64 @@
+@model APIMvc.Models.FMViewModel
+@{
+    ViewBag.Title = "Editar Frase";
+}
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]</div>
+}
+<!--Configuração para exibir mensagem de erro -->
+@if (@TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["MensagemErro"]</div>
+}<!--Título da página para o navegador-->
+<h2>Editar Frase</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Id, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "formcontrol",
+                            @readonly = "readonly"
+                        }
+                    })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "control-label col-md-2"} })
+            </div>
+             @Html.LabelFor(model => model.Frase, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Frase, new { htmlAttributes = new { @class = "form-control"} })
+            </div><br>
+             @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Autor
+                , new { htmlAttributes = new { @class = "form-control"} })
+            </div><br>
+             @Html.LabelFor(model => model.Sentimento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Sentimento, new { htmlAttributes = new { @class = "form-control"} })
+            </div><br>
+             <br>
+        </div><br>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Salvar alterações" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Retornar", "Index")
+</div>
